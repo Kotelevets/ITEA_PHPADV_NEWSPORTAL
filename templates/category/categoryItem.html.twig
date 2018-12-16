@@ -1,9 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}News Portal - Main {% endblock %}
+{% block title %}News Portal - {{ itemTitle }}{% endblock %}
+
+{% block categories %}
+    <ul class="categories nav nav-pills justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link {{ item=='world' ? 'active' }}" href="/category/world">
+                World
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ item=='it' ? 'active' }}" href="/category/it">
+                IT
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ item=='sport' ? 'active' }}" href="/category/sport">
+                Sport
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ item=='science' ? 'active' }}" href="/category/science">
+                Science
+            </a>
+        </li>
+    </ul>
+
+{% endblock %}
 
 {% block body %}
 <main class="index" role="main">
+
     <div class="main-post">
         <img class="post-image" src= {{ posts[0].getImage }} alt="">
         <small class="text-muted">{{ posts[0].getPublicationDate.format(dateFormat) }}</small>
@@ -13,6 +40,7 @@
         <button type="button" class="btn btn-sm btn-outline-secondary">Read more</button>
         <div class="clearfix"></div>
     </div>
+
     <div class="py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -37,5 +65,6 @@
             </div>
         </div>
     </div>
+
 </main>
 {% endblock %}

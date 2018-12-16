@@ -18,7 +18,14 @@ final class DefaultController extends AbstractController
         $posts = $service->getPosts();
         $posts = $posts->getIterator();
 
+        $dateFormat = 'd.m.Y H:i';
+
         ///* корнем считается папка templates */
-        return $this->render('default/index.html.twig', ['posts' => $posts]);
+        return $this->
+        render('default/index.html.twig',
+            ['posts'      => $posts,
+             'dateFormat' => $dateFormat
+            ]
+        );
     }
 }

@@ -27,6 +27,5 @@ final class FakeHomeService implements HomePageServiceInterface
         }
 
          return $collection;
-
     }
 }
