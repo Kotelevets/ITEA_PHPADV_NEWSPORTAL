@@ -15,17 +15,16 @@ final class CategoryController extends AbstractController
 {
     public function showItem(HomePageServiceInterface $servicePost, CategoryPageServiceInteface $serviceCategory, $item): Response
     {
-        $posts = $servicePost->getPosts();
-        $posts = $posts->getIterator();
-
         $category = $serviceCategory->getCategoryByItem($item);
-        $categoryDescription = $category->getDescription();
-
-        $dateFormat = 'd.m.Y H:i';
 
         if (!$category) {
-            throw $this->createNotFoundException('The category not found');
+            throw $this->createNotFoundException(\sprintf('News category \'%s\' not found', $item));
         }
+
+        $categoryDescription = $category->getDescription();
+        $dateFormat = 'd.m.Y H:i';
+        $posts = $servicePost->getPosts();
+        $posts = $posts->getIterator();
 
         return $this->
         render(
@@ -34,7 +33,7 @@ final class CategoryController extends AbstractController
                 'posts' => $posts,
                 'dateFormat' => $dateFormat,
                 'item' => $item,
-                'blockDescription' => $categoryDescription
+                'blockDescription' => $categoryDescription,
             ]
         );
     }

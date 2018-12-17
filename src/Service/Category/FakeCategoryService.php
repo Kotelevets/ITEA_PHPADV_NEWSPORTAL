@@ -37,7 +37,7 @@ final class FakeCategoryService implements CategoryPageServiceInteface
         return $collection;
     }
 
-    public function getCategoryByItem(string $item): Category
+    public function getCategoryByItem(string $item): ?Category
     {
         if (array_key_exists($item, $this->categoryData)) {
             $dto = new Category(
