@@ -22,10 +22,12 @@ final class DefaultController extends AbstractController
 
         ///* корнем считается папка templates */
         return $this->
-        render('default/index.html.twig',
-            array('posts' => $posts,
-             'dateFormat' => $dateFormat,
-            )
+        render(
+            'default/index.html.twig',
+            [
+                'posts' => $posts,
+                'dateFormat' => $dateFormat,
+            ]
         );
     }
 }

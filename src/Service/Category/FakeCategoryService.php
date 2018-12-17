@@ -8,8 +8,8 @@ use App\Service\CategoryPageServiceInteface;
 
 final class FakeCategoryService implements CategoryPageServiceInteface
 {
-    private $inputArray =
-        array(
+    private $categoryData =
+        [
             'world' => 'You can read many interesting articles about our beautiful world there, 
                      such as travelling, archeology, space, people etc.',
             'it' => 'You can read many interesting articles about IT sphere there, 
@@ -18,14 +18,14 @@ final class FakeCategoryService implements CategoryPageServiceInteface
                      such as competitions, championships, health life etc.',
             'science' => 'You can read many interesting articles about science there, 
                      such as nano-world, technologies, forums etc.',
-        )
+        ]
     ;
 
     public function getCategories(): CategoriesCollection
     {
         $collection = new CategoriesCollection();
 
-        foreach ($this->inputArray as $key => $value) {
+        foreach ($this->categoryData as $key => $value) {
             $dto = new Category(
                 $key,
                 $value
@@ -35,5 +35,19 @@ final class FakeCategoryService implements CategoryPageServiceInteface
         }
 
         return $collection;
+    }
+
+    public function getCategoryByItem(string $item): Category
+    {
+        if (array_key_exists($item, $this->categoryData)) {
+            $dto = new Category(
+                $item,
+                $this->categoryData[$item]
+            );
+
+            return $dto;
+        }
+
+        return null;
     }
 }
