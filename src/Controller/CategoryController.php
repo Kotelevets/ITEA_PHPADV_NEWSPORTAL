@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CategoryPageServiceInteface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\HomePageServiceInterface;
@@ -12,20 +13,30 @@ use App\Service\HomePageServiceInterface;
  */
 final class CategoryController extends AbstractController
 {
-    public function showItem(HomePageServiceInterface $service, $item): Response
+    public function showItem(HomePageServiceInterface $servicePost,
+                             CategoryPageServiceInteface $serviceCategory,
+                             $item): Response
     {
-        $posts = $service->getPosts();
+        $posts = $servicePost->getPosts();
         $posts = $posts->getIterator();
+
+        $categories = $serviceCategory->getCategories();
+        $categories = $categories->getIterator();
 
         $dateFormat = 'd.m.Y H:i';
 
+        if (!array_key_exists($item, $categories)){
+            throw $this->createNotFoundException('The category not found');
+        }
+
         return $this->
         render('category/categoryItem.html.twig',
-                   ['posts'      => $posts,
-                    'dateFormat' => $dateFormat,
-                    'item'       => $item,
-                    'itemTitle'  => \ucfirst($item)
-                   ]
-              );
+            [
+             'posts' => $posts,
+             'categories' => $categories,
+             'dateFormat' => $dateFormat,
+             'item' => $item
+            ]
+        );
     }
 }

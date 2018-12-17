@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}News Portal - {{ itemTitle }}{% endblock %}
+{% block title %}News Portal - {{ item|capitalize }}{% endblock %}
 
 {% block categories %}
     <ul class="categories nav nav-pills justify-content-center">
@@ -25,6 +25,14 @@
             </a>
         </li>
     </ul>
+
+
+    <div class="d-flex flex-column flex-md-row align-items-md-center p-5">
+        <div class="pt-md-3 pb-md-4">
+            <h1 class="bd-title mt-0">{{ item|capitalize }}</h1>
+            <p class="bd-lead">{{ categories[item] ?? '' }}</p>
+        </div>
+    </div>
 
 {% endblock %}
 
