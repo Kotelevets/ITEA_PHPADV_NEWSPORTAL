@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * Default site controller
+ * Default site controller.
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  */
@@ -23,8 +23,8 @@ final class DefaultController extends AbstractController
         ///* корнем считается папка templates */
         return $this->
         render('default/index.html.twig',
-            ['posts'      => $posts,
-             'dateFormat' => $dateFormat
+            ['posts' => $posts,
+             'dateFormat' => $dateFormat,
             ]
         );
     }

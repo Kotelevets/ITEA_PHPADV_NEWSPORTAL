@@ -7,8 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Service\HomePageServiceInterface;
 
 /**
- * Class CategoryController
- * @package App\Controller
+ * Class CategoryController.
  */
 final class CategoryController extends AbstractController
 {
@@ -21,10 +20,10 @@ final class CategoryController extends AbstractController
 
         return $this->
         render('category/categoryItem.html.twig',
-                   ['posts'      => $posts,
+                   ['posts' => $posts,
                     'dateFormat' => $dateFormat,
-                    'item'       => $item,
-                    'itemTitle'  => \ucfirst($item)
+                    'item' => $item,
+                    'itemTitle' => \ucfirst($item),
                    ]
               );
     }

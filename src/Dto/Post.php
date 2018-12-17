@@ -2,7 +2,10 @@
 
 namespace App\Dto;
 
-
+/**
+ * Class Post
+ * It's data transfer object to posts.
+ */
 final class Post
 {
     private $image;
