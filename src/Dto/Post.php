@@ -2,7 +2,6 @@
 
 namespace App\Dto;
 
-
 final class Post
 {
     private $image;

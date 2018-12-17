@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use App\Service\CategoryPageServiceInteface;
+use App\Service\HomePageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use App\Service\HomePageServiceInterface;
 
 /**
- * Class CategoryController
- * @package App\Controller
+ * Class CategoryController.
  */
 final class CategoryController extends AbstractController
 {
@@ -25,18 +24,18 @@ final class CategoryController extends AbstractController
 
         $dateFormat = 'd.m.Y H:i';
 
-        if (!array_key_exists($item, $categories)){
+        if (!array_key_exists($item, $categories)) {
             throw $this->createNotFoundException('The category not found');
         }
 
         return $this->
         render('category/categoryItem.html.twig',
-            [
+            array(
              'posts' => $posts,
              'categories' => $categories,
              'dateFormat' => $dateFormat,
-             'item' => $item
-            ]
+             'item' => $item,
+            )
         );
     }
 }

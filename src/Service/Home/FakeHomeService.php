@@ -15,8 +15,7 @@ final class FakeHomeService implements HomePageServiceInterface
         $faker = \Faker\Factory::create();
         $collection = new PostsCollection();
 
-        for ($i = 0; $i < self::POSTS_COUNT; $i++ ) {
-
+        for ($i = 0; $i < self::POSTS_COUNT; ++$i) {
             $dto = new Post(
                 $faker->text,
                 $faker->dateTime
@@ -26,6 +25,6 @@ final class FakeHomeService implements HomePageServiceInterface
             $collection->addPost($dto);
         }
 
-         return $collection;
+        return $collection;
     }
 }

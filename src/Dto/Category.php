@@ -2,7 +2,6 @@
 
 namespace App\Dto;
 
-
 final class Category
 {
     private $category;
@@ -10,7 +9,7 @@ final class Category
 
     public function __construct(string $category, string $description)
     {
-        $this->category    = $category;
+        $this->category = $category;
         $this->description = $description;
     }
 
@@ -23,5 +22,4 @@ final class Category
     {
         return $this->description;
     }
-
 }
