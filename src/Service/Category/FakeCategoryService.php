@@ -2,12 +2,17 @@
 
 namespace App\Service\Category;
 
+use App\Exceptions\CategoryNotFoundException;
+use App\Post\PostsCollection;
 use App\Category\CategoriesCollection;
+use App\Dto\Post;
 use App\Dto\Category;
 use App\Service\CategoryPageServiceInteface;
 
 final class FakeCategoryService implements CategoryPageServiceInteface
 {
+    private const POSTS_COUNT = 4;
+
     private $categoryData =
         [
             'world' => 'You can read many interesting articles about our beautiful world there, 
@@ -20,6 +25,24 @@ final class FakeCategoryService implements CategoryPageServiceInteface
                      such as nano-world, technologies, forums etc.',
         ]
     ;
+
+    public function getPosts(): PostsCollection
+    {
+        $faker = \Faker\Factory::create();
+        $collection = new PostsCollection();
+
+        for ($i = 0; $i < self::POSTS_COUNT; ++$i) {
+            $dto = new Post(
+                $faker->text,
+                $faker->dateTime
+            );
+            $dto->setImage($faker->imageUrl());
+
+            $collection->addPost($dto);
+        }
+
+        return $collection;
+    }
 
     public function getCategories(): CategoriesCollection
     {
@@ -37,17 +60,17 @@ final class FakeCategoryService implements CategoryPageServiceInteface
         return $collection;
     }
 
-    public function getCategoryByItem(string $item): ?Category
+    public function getCategory(string $categoryName): Category
     {
-        if (array_key_exists($item, $this->categoryData)) {
+        if (array_key_exists($categoryName, $this->categoryData)) {
             $dto = new Category(
-                $item,
-                $this->categoryData[$item]
+                $categoryName,
+                $this->categoryData[$categoryName]
             );
 
             return $dto;
         }
 
-        return null;
+        throw new CategoryNotFoundException();
     }
 }

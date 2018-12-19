@@ -6,7 +6,7 @@
 <main class="index" role="main">
     <div class="main-post">
         <img class="post-image" src= {{ posts[0].getImage }} alt="">
-        <small class="text-muted">{{ posts[0].getPublicationDate.format(dateFormat) }}</small>
+        <small class="text-muted">{{ posts[0].getPublicationDate }}</small>
         <p class="post-text">
             {{ posts[0].getDescription }}
         </p>
@@ -28,7 +28,7 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Read</button>
                                     </div>
-                                    <small class="text-muted">{{ posts[i].getPublicationDate.format(dateFormat) }}</small>
+                                    <small class="text-muted">{{ posts[i].getPublicationDate }}</small>
                                 </div>
                             </div>
                         </div>

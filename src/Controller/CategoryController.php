@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Exceptions\CategoryNotFoundException;
 use App\Service\CategoryPageServiceInteface;
-use App\Service\HomePageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,26 +13,24 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class CategoryController extends AbstractController
 {
-    public function showItem(HomePageServiceInterface $servicePost, CategoryPageServiceInteface $serviceCategory, $item): Response
+    public function showPageByCategory(CategoryPageServiceInteface $serviceCategory, $categoryName): Response
     {
-        $category = $serviceCategory->getCategoryByItem($item);
-
-        if (!$category) {
-            throw $this->createNotFoundException(\sprintf('News category \'%s\' not found', $item));
+        try {
+            $category = $serviceCategory->getCategory($categoryName);
+        } catch (CategoryNotFoundException $e) {
+            throw $this->createNotFoundException(\sprintf('News category \'%s\' not found', $categoryName));
         }
 
         $categoryDescription = $category->getDescription();
-        $dateFormat = 'd.m.Y H:i';
-        $posts = $servicePost->getPosts();
+        $posts = $serviceCategory->getPosts();
         $posts = $posts->getIterator();
 
         return $this->
         render(
-            'category/categoryItem.html.twig',
+            'category/category.html.twig',
             [
                 'posts' => $posts,
-                'dateFormat' => $dateFormat,
-                'item' => $item,
+                'categoryName' => $categoryName,
                 'blockDescription' => $categoryDescription,
             ]
         );
