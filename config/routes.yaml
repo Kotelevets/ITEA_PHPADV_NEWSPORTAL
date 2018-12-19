@@ -5,3 +5,7 @@ index:
 page_by_category:
     path: /category/{categoryName}
     controller: App\Controller\CategoryController::showPageByCategory
+
+contacts_page:
+    path: /contacts
+    controller: App\Controller\ContactsController::showContacts
