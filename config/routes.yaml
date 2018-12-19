@@ -2,6 +2,6 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 
-category_item:
-    path: /category/{item}
-    controller: App\Controller\CategoryController::showItem
+page_by_category:
+    path: /category/{categoryName}
+    controller: App\Controller\CategoryController::showPageByCategory

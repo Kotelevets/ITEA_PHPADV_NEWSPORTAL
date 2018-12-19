@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Service\HomePageServiceInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Default site controller.
@@ -22,9 +22,11 @@ final class DefaultController extends AbstractController
 
         ///* корнем считается папка templates */
         return $this->
-        render('default/index.html.twig',
-            ['posts' => $posts,
-             'dateFormat' => $dateFormat,
+        render(
+            'default/index.html.twig',
+            [
+                'posts' => $posts,
+                'dateFormat' => $dateFormat,
             ]
         );
     }
