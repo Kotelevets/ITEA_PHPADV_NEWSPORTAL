@@ -22,8 +22,18 @@
 
     </div>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="container">
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        {% if formSuccess %}
+            <div class="alert alert-success col-sm-3" role="alert">
+                Thanks for your feedback! <br> It was successfully sended to us.
+            </div>
+        {% endif %}
+
+    </div>
 
 {% endblock %}
