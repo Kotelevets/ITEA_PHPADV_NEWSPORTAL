@@ -9,7 +9,7 @@ use App\Dto\Post;
 use App\Dto\Category;
 use App\Service\CategoryPageServiceInteface;
 
-final class FakeCategoryService implements CategoryPageServiceInteface
+final class FakeCategoryPageService implements CategoryPageServiceInteface
 {
     private const POSTS_COUNT = 4;
 

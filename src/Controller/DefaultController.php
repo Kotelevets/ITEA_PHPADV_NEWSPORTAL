@@ -16,9 +16,6 @@ final class DefaultController extends AbstractController
     public function index(HomePageServiceInterface $service): Response
     {
         $posts = $service->getPosts();
-        $posts = $posts->getIterator();
-
-        $dateFormat = 'd.m.Y H:i';
 
         ///* корнем считается папка templates */
         return $this->
@@ -26,7 +23,6 @@ final class DefaultController extends AbstractController
             'default/index.html.twig',
             [
                 'posts' => $posts,
-                'dateFormat' => $dateFormat,
             ]
         );
     }

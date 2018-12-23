@@ -38,12 +38,12 @@
 
 {% block body %}
 <main class="index" role="main">
-
+    {% set mainPost = posts.shift %}
     <div class="main-post">
-        <img class="post-image" src= {{ posts[0].getImage }} alt="">
-        <small class="text-muted">{{ posts[0].getPublicationDate }}</small>
+        <img class="post-image" src= {{ mainPost.image == 'default.png'  ? ('/img/' . mainPost.image) : mainPost.image }} alt="">
+        <small class="text-muted">{{ mainPost.publicationDate }}</small>
         <p class="post-text">
-            {{ posts[0].getDescription }}
+            {{ mainPost.description }}
         </p>
         <button type="button" class="btn btn-sm btn-outline-secondary">Read more</button>
         <div class="clearfix"></div>
@@ -52,19 +52,19 @@
     <div class="py-5 bg-light">
         <div class="container">
             <div class="row">
-                {% for i in 1..3 %}
+                {% for post in posts %}
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img class="card-img-top" src={{ posts[i].getImage }} alt="">
+                            <img class="card-img-top" src={{ post.image == 'default.png'  ? ('/img/' . post.image) : post.image }} alt="">
                             <div class="card-body">
                                 <p class="card-text">
-                                    {{ posts[i].getDescription }}
+                                    {{ post.description }}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Read</button>
                                     </div>
-                                    <small class="text-muted">{{ posts[i].getPublicationDate }}</small>
+                                    <small class="text-muted">{{ post.publicationDate }}</small>
                                 </div>
                             </div>
                         </div>

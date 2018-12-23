@@ -35,6 +35,6 @@ final class Post
 
     public function getPublicationDate(): string
     {
-        return $this->publicationDate->format('d.m.Y H:i');
+        return $this->publicationDate->format('d.m.Y');
     }
 }

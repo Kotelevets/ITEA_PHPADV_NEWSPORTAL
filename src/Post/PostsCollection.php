@@ -18,6 +18,11 @@ class PostsCollection implements \IteratorAggregate
         $this->posts[] = $post;
     }
 
+    public function shift(): ?Post
+    {
+        return \array_shift($this->posts);
+    }
+
     public function getIterator(): iterable
     {
         return new \ArrayIterator($this->posts);

@@ -23,7 +23,6 @@ final class CategoryController extends AbstractController
 
         $categoryDescription = $category->getDescription();
         $posts = $serviceCategory->getPosts();
-        $posts = $posts->getIterator();
 
         return $this->
         render(
