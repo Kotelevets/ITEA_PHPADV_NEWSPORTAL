@@ -10,27 +10,35 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class CategoryController
  * This controller for page by category response.
+ * Controller for post category page.
  */
 final class CategoryController extends AbstractController
 {
-    public function showPageByCategory(CategoryPageServiceInteface $serviceCategory, $categoryName): Response
+    /**
+     * Renders category page by provided slug.
+     *
+     * @param string                      $slug
+     * @param CategoryPageServiceInteface $service
+     *
+     * @return Response
+     */
+    public function view($slug, CategoryPageServiceInteface $service): Response
     {
         try {
-            $category = $serviceCategory->getCategory($categoryName);
+            $category = $service->getCategoryBySlug($slug);
         } catch (CategoryNotFoundException $e) {
-            throw $this->createNotFoundException(\sprintf('News category \'%s\' not found', $categoryName));
+            throw $this->createNotFoundException(\sprintf('News category \'%s\' not found', $slug));
         }
 
-        $categoryDescription = $category->getDescription();
-        $posts = $serviceCategory->getPosts();
+        $posts = $service->getPosts($category);
 
         return $this->
         render(
             'category/category.html.twig',
             [
                 'posts' => $posts,
-                'categoryName' => $categoryName,
-                'blockDescription' => $categoryDescription,
+                'category' => $category,
+                'slug' => $slug,
             ]
         );
     }

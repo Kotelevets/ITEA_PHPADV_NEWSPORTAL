@@ -1,54 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}News Portal - {{ categoryName|capitalize }}{% endblock %}
-
-{% block categories %}
-    <ul class="categories nav nav-pills justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link {{ categoryName=='world' ? 'active' }}" href="/category/world">
-                World
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ categoryName=='it' ? 'active' }}" href="/category/it">
-                IT
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ categoryName=='sport' ? 'active' }}" href="/category/sport">
-                Sport
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ categoryName=='science' ? 'active' }}" href="/category/science">
-                Science
-            </a>
-        </li>
-    </ul>
-
-
-    <div class="d-flex flex-column flex-md-row align-items-md-center p-5">
-        <div class="pt-md-3 pb-md-4">
-            <h1 class="bd-title mt-0">{{ (categoryName == 'it') ? 'IT' : categoryName|capitalize }}</h1>
-            <p class="bd-lead">{{ blockDescription ?? '' }}</p>
-        </div>
-    </div>
-
-{% endblock %}
+{% block title %}News Portal - {{ category.name }}{% endblock %}
 
 {% block body %}
-<main class="index" role="main">
-    {% set mainPost = posts.shift %}
-    <div class="main-post">
-        <img class="post-image" src= {{ mainPost.image | imagePath }} alt="">
-        <small class="text-muted">{{ mainPost.publicationDate }}</small>
-        <p class="post-text">
-            {{ mainPost.description }}
-        </p>
-        <button type="button" class="btn btn-sm btn-outline-secondary">Read more</button>
-        <div class="clearfix"></div>
+<main class="category" role="main">
+    <div class="container">
+        <h1>{{ category.name }}</h1>
+        <p>{{ category.description }}</p>
     </div>
-
     <div class="py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -64,7 +23,7 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Read</button>
                                     </div>
-                                    <small class="text-muted">{{ post.publicationDate }}</small>
+                                    <small class="text-muted">{{ post.publicationDate | ago}}</small>
                                 </div>
                             </div>
                         </div>

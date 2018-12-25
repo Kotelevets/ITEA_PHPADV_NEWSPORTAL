@@ -2,20 +2,23 @@
 
 namespace App\Dto;
 
+/**
+ * Data Transfer Object for Category entity.
+ */
 final class Category
 {
-    private $category;
+    private $name;
     private $description;
 
-    public function __construct(string $category, string $description)
+    public function __construct(string $name, string $description)
     {
-        $this->category = $category;
+        $this->name = $name;
         $this->description = $description;
     }
 
-    public function getCategory(): string
+    public function getName(): string
     {
-        return $this->category;
+        return $this->name;
     }
 
     public function getDescription(): string

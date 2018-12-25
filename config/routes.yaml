@@ -2,9 +2,11 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 
-page_by_category:
-    path: /category/{categoryName}
-    controller: App\Controller\CategoryController::showPageByCategory
+category_view:
+    path: /category/{slug}
+    requirements:
+        slug: '^[A-Za-z0-9-_]+$'
+    controller: App\Controller\CategoryController::view
 
 contacts_page:
     path: /contacts

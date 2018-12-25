@@ -4,36 +4,64 @@ namespace App\Service\Category;
 
 use App\Exceptions\CategoryNotFoundException;
 use App\Post\PostsCollection;
-use App\Category\CategoriesCollection;
 use App\Dto\Post;
 use App\Dto\Category;
+use Faker\Factory;
 
+/**
+ * Fake category page service that generates fake data.
+ */
 final class FakeCategoryPageService implements CategoryPageServiceInteface
 {
-    private const POSTS_COUNT = 4;
+    private const POSTS_LIMIT = 4;
 
-    private $categoryData =
-        [
-            'world' => 'You can read many interesting articles about our beautiful world there, 
-                     such as travelling, archeology, space, people etc.',
-            'it' => 'You can read many interesting articles about IT sphere there, 
-                     such as programming, managing IT projects, IT career etc.',
-            'sport' => 'You can read many interesting articles about sport there, 
-                     such as competitions, championships, health life etc.',
-            'science' => 'You can read many interesting articles about science there, 
-                     such as nano-world, technologies, forums etc.',
-        ]
-    ;
+    private const CATEGORIES = [
+        'it' => [
+            'name' => 'IT',
+        ],
+        'world' => [
+            'name' => 'World',
+        ],
+        'science' => [
+            'name' => 'Sciense',
+        ],
+        'sport' => [
+            'name' => 'Sport',
+        ],
+    ];
 
-    public function getPosts(): PostsCollection
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategoryBySlug(string $slug): Category
     {
-        $faker = \Faker\Factory::create();
+        if (!isset(self::CATEGORIES[$slug])) {
+            throw new CategoryNotFoundException();
+        }
+
+        $faker = Factory::create();
+
+        $dto = new Category(
+            self::CATEGORIES[$slug]['name'],
+            $faker->sentence
+        );
+
+        return $dto;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosts(Category $category): PostsCollection
+    {
+        $faker = Factory::create();
         $collection = new PostsCollection();
 
-        for ($i = 0; $i < self::POSTS_COUNT; ++$i) {
+        for ($i = 0; $i < self::POSTS_LIMIT; ++$i) {
             $dto = new Post(
                 $faker->text,
-                $faker->dateTime
+                $faker->dateTime,
+                $category
             );
             $dto->setImage($faker->imageUrl());
 
@@ -41,35 +69,5 @@ final class FakeCategoryPageService implements CategoryPageServiceInteface
         }
 
         return $collection;
-    }
-
-    public function getCategories(): CategoriesCollection
-    {
-        $collection = new CategoriesCollection();
-
-        foreach ($this->categoryData as $key => $value) {
-            $dto = new Category(
-                $key,
-                $value
-            );
-
-            $collection->addCategory($dto);
-        }
-
-        return $collection;
-    }
-
-    public function getCategory(string $categoryName): Category
-    {
-        if (array_key_exists($categoryName, $this->categoryData)) {
-            $dto = new Category(
-                $categoryName,
-                $this->categoryData[$categoryName]
-            );
-
-            return $dto;
-        }
-
-        throw new CategoryNotFoundException();
     }
 }

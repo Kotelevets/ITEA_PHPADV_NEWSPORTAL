@@ -34,6 +34,7 @@ services:
         arguments:
             - '%app.defaultImageName%'
             - '%app.imagesRoot%'
+
     # Aliases
 
     App\Service\Home\HomePageServiceInterface: '@App\Service\Home\FakeHomePageService'

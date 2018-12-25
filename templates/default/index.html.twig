@@ -7,7 +7,7 @@
     {% set mainPost = posts.shift %}
     <div class="main-post">
         <img class="post-image" src= {{ mainPost.image | imagePath }} alt="">
-        <small class="text-muted">{{ mainPost.publicationDate }}</small>
+        <small class="text-muted">{{ mainPost.publicationDate | ago }}</small>
         <p class="post-text">
             {{ mainPost.description }}
         </p>
@@ -29,7 +29,7 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Read</button>
                                     </div>
-                                    <small class="text-muted">{{ post.publicationDate }}</small>
+                                    <small class="text-muted">{{ post.publicationDate | ago }}</small>
                                 </div>
                             </div>
                         </div>
