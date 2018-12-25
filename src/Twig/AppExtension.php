@@ -7,6 +7,15 @@ use Twig\TwigFilter;
 
 final class AppExtension extends AbstractExtension
 {
+    private $defaultImageName;
+    private $imagesRoot;
+
+    public function __construct(string $defaultImageName, string $imagesRoot)
+    {
+        $this->defaultImageName = $defaultImageName;
+        $this->imagesRoot = $imagesRoot;
+    }
+
     public function getFilters()
     {
         return [
@@ -16,6 +25,6 @@ final class AppExtension extends AbstractExtension
 
     public function imagePathFilter(string $path): string
     {
-        return 'defaut.png' === $path ? \sprintf('/img/%s', $path) : $path;
+        return $path === $this->defaultImageName ? \sprintf('%s/%s', $this->imagesRoot, $path) : $path;
     }
 }
