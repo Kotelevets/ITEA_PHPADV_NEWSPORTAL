@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\HomePageServiceInterface;
+use App\Service\Home\HomePageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 

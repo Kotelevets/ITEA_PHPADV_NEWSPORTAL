@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Exceptions\CategoryNotFoundException;
-use App\Service\CategoryPageServiceInteface;
+use App\Service\Category\CategoryPageServiceInteface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -4,7 +4,6 @@ namespace App\Service\Home;
 
 use App\Dto\Post;
 use App\Post\PostsCollection;
-use App\Service\HomePageServiceInterface;
 
 final class FakeHomePageService implements HomePageServiceInterface
 {

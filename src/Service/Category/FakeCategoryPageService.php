@@ -7,7 +7,6 @@ use App\Post\PostsCollection;
 use App\Category\CategoriesCollection;
 use App\Dto\Post;
 use App\Dto\Category;
-use App\Service\CategoryPageServiceInteface;
 
 final class FakeCategoryPageService implements CategoryPageServiceInteface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Category;
 
 use App\Dto\Category;
 use App\Post\PostsCollection;
