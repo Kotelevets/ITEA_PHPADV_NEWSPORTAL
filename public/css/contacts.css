@@ -1,0 +1,31 @@
+main.contacts {
+    padding-top: 60px;
+}
+
+main.contacts .page-title {
+    margin-bottom: 30px;
+}
+
+main.contacts a.phone,
+main.contacts a.email {
+    display: block;
+    width: fit-content;
+}
+
+main.contacts .social-networks {
+    margin-top: 20px;
+}
+
+main.contacts .social-networks > a {
+    display: inline-block;
+    margin-right: 10px;
+
+    color: #212529;
+    font-size: 24px;
+    text-decoration: none;
+    transition: all 250ms;
+}
+
+main.contacts .social-networks > a:hover {
+    color: #394045;
+}

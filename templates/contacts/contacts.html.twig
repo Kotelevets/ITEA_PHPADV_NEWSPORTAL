@@ -1,39 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}News Portal - Contacts {% endblock %}
+{% block title %}News Portal - Contact us {% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/brands.css" integrity="sha384-Px1uYmw7+bCkOsNAiAV5nxGKJ0Ixn5nChyW8lCK1Li1ic9nbO5pC/iXaq27X5ENt" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/fontawesome.css" integrity="sha384-BzCy2fixOYd0HObpx3GMefNqdbA7Qjcc91RgYeDjrHTIEXqiF00jKvgQG0+zY/7I" crossorigin="anonymous">
+<link href="{{ asset('css/contacts.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
-
-    <div class="container">
-
-        <dd class="row">
-            <dt class="col-sm-3">E-mail:</dt>
-            <dd class="col-sm-9">news@example.com</dd>
-
-            <dt class="col-sm-3">Phone number:</dt>
-            <dd class="col-sm-9">+38 (044) 999-99-99</dd>
-
-            <dt class="col-sm-3">Adress:</dt>
-            <dd class="col-sm-9">Kyiv, Smolenskaya str. 1</dd>
-        </dl>
-
-        <div class="text-center"> <p>-------------------------</p> </div>
-        <div class="row">Use this form for your feedback:</div>
-
-    </div>
-
-    <div class="container">
-
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-
-        {% if formSuccess %}
-            <div class="alert alert-success col-sm-3" role="alert">
-                Thanks for your feedback! <br> It was successfully sended to us.
+    <main role="main" class="contacts">
+        <div class="container">
+            {% include 'partials/_flashes.html.twig' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="page-title">Contact us</h1>
+                    <address>{{ page.address }}</address>
+                    <a href="tel:{{ page.phone }}" class="phone">{{ page.phone }}</a>
+                    <a href="mailto:{{ page.email }}" class="email">{{ page.email }}</a>
+                    <div class="social-networks">
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Read us in Facebook" target="_blank" rel="noopener">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Follow our Twitter" target="_blank" rel="noopener">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="See photos in Instagram" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    <div class="form-group">
+                        <label for="name">Your name</label>
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your e-mail</label>
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your message</label>
+                        {{ form_widget(form.message, {'attr': {'class': 'form-control', 'cols': 30, 'rows': 5}}) }}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
-        {% endif %}
+        </div>
+    </main>
+{% endblock %}
 
-    </div>
-
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 {% endblock %}

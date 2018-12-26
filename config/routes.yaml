@@ -8,6 +8,6 @@ category_view:
         slug: '^[A-Za-z0-9-_]+$'
     controller: App\Controller\CategoryController::view
 
-contacts_page:
+contacts:
     path: /contacts
-    controller: App\Controller\ContactsController::showContacts
+    controller: App\Controller\DefaultController::contacts
