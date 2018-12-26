@@ -8,6 +8,7 @@ use App\Service\Home\HomePageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Default site controller.
@@ -37,6 +38,8 @@ final class DefaultController extends AbstractController
      * @param ContactsPageServiceInterface $service
      *
      * @return Response
+     *
+     * @Route("/contacts", name="contacts")
      */
     public function contacts(Request $request, ContactsPageServiceInterface $service): Response
     {
