@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Client's contacts type
+ * Client's contacts type.
  */
 final class ContactsType extends AbstractType
 {

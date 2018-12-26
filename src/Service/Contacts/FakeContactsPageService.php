@@ -6,11 +6,10 @@ use App\Dto\Contacts;
 use Faker\Factory;
 
 /**
- * Fake contacts page service that generates fake data
+ * Fake contacts page service that generates fake data.
  */
 final class FakeContactsPageService implements ContactsPageServiceInterface
 {
-
     public function getContacts(): Contacts
     {
         $faker = Factory::create();
