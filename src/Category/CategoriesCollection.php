@@ -2,22 +2,23 @@
 
 namespace App\Category;
 
-use App\Dto\Category;
+use App\Entity\Category;
 
-class CategoriesCollection implements \IteratorAggregate
+final class CategoriesCollection implements \IteratorAggregate
 {
     private $categories;
 
-    public function __construct(Category ...$Categories)
+    public function __construct($categories)
     {
-        $this->categories = $Categories;
+        $this->categories = $categories;
     }
 
-    public function addCategory(Category $category): void
-    {
-        $this->categories[$category->getCategory()] = $category->getDescription();
-    }
-
+    /*
+        public function addCategory(Category $category): void
+        {
+            $this->categories[$category->getCategory()] = $category->getDescription();
+        }
+    */
     public function getIterator(): iterable
     {
         return new \ArrayIterator($this->categories);

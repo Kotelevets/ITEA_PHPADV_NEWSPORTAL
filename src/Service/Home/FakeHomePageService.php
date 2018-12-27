@@ -2,6 +2,7 @@
 
 namespace App\Service\Home;
 
+use App\Category\CategoriesCollection;
 use App\Dto\Post;
 use App\Dto\Category;
 use App\Post\PostsCollection;
@@ -52,5 +53,10 @@ final class FakeHomePageService implements HomePageServiceInterface
         }
 
         return $collection;
+    }
+
+    public function getCategories(): CategoriesCollection
+    {
+        return new CategoriesCollection([]);
     }
 }

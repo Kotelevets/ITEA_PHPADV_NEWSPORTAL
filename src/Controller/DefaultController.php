@@ -20,6 +20,7 @@ final class DefaultController extends AbstractController
     public function index(HomePageServiceInterface $service): Response
     {
         $posts = $service->getPosts();
+        $categories = $service->getCategories();
 
         ///* корнем считается папка templates */
         return $this->
@@ -27,6 +28,7 @@ final class DefaultController extends AbstractController
             'default/index.html.twig',
             [
                 'posts' => $posts,
+                'categories' => $categories,
             ]
         );
     }
