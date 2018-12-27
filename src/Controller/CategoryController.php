@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Exceptions\CategoryNotFoundException;
-use App\Service\Category\CategoryPageServiceInteface;
+use App\Service\Category\CategoryPageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,11 +18,11 @@ final class CategoryController extends AbstractController
      * Renders category page by provided slug.
      *
      * @param string                      $slug
-     * @param CategoryPageServiceInteface $service
+     * @param CategoryPageServiceInterface $service
      *
      * @return Response
      */
-    public function view($slug, CategoryPageServiceInteface $service): Response
+    public function view($slug, CategoryPageServiceInterface $service): Response
     {
         try {
             $category = $service->getCategoryBySlug($slug);
@@ -31,14 +31,16 @@ final class CategoryController extends AbstractController
         }
 
         $posts = $service->getPosts($category);
+        $categories = $service->getCategories();
 
         return $this->
         render(
             'category/category.html.twig',
             [
-                'posts' => $posts,
-                'category' => $category,
-                'slug' => $slug,
+                'posts'      => $posts,
+                'category'   => $category,
+                'categories' => $categories,
+                'slug'       => $slug,
             ]
         );
     }

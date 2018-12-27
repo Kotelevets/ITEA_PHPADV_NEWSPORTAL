@@ -35,9 +35,9 @@ final class Post
         return $this->description;
     }
 
-    public function getPublicationDate(): string
+    public function getPublicationDate(): \DateTimeInterface
     {
-        return $this->publicationDate->format('d-m-Y');
+        return $this->publicationDate;
     }
 
     public function getCategory(): Category

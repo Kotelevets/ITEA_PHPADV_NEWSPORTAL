@@ -122,7 +122,7 @@ class Post
         return $this->publicationDate;
     }
 
-    public function setPublicationDate(\DateTimeInterface $publicationDate): self
+    public function setPublicationDate(?\DateTimeInterface $publicationDate): self
     {
         $this->publicationDate = $publicationDate;
 

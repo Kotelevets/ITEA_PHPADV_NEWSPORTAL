@@ -12,11 +12,15 @@ final class PostMapper
     {
         $categoryMapper = new CategoryMapper();
 
-        return new PostDto(
-            \substr($entity->getBody(), 0, 200),
-            new \DateTime(),
-            $categoryMapper->entityToDto($entity->getCategory())
+        $postDto = new PostDto(
+             $entity->getShortDescription(),
+             $entity->getPublicationDate(),
+             $categoryMapper->entityToDto($entity->getCategory())
         );
+
+        $postDto->setImage($entity->getImage());
+
+        return $postDto;
     }
 
     public function dtoToEntity()

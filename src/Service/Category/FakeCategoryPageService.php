@@ -11,7 +11,7 @@ use Faker\Factory;
 /**
  * Fake category page service that generates fake data.
  */
-final class FakeCategoryPageService implements CategoryPageServiceInteface
+final class FakeCategoryPageService implements CategoryPageServiceInterface
 {
     private const POSTS_LIMIT = 4;
 
@@ -52,7 +52,7 @@ final class FakeCategoryPageService implements CategoryPageServiceInteface
     /**
      * {@inheritdoc}
      */
-    public function getPosts(Category $category): PostsCollection
+    public function getPosts($category): PostsCollection
     {
         $faker = Factory::create();
         $collection = new PostsCollection();

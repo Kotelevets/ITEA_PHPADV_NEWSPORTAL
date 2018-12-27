@@ -10,7 +10,7 @@ use Faker\Factory;
 
 class PostFixtures extends Fixture
 {
-    private const POSTS_NUMBER = 15;
+    private const POSTS_NUMBER = 16;
 
     public function load(ObjectManager $manager)
     {
@@ -22,10 +22,13 @@ class PostFixtures extends Fixture
             $category = $this->getReference(Category::class.'_'.$faker->numberBetween(0, 3));
 
             $post
+                ->setCategory($category)
                 ->setTitle($faker->sentence)
                 ->setSlug($faker->slug)
                 ->setBody($faker->boolean ? $faker->text(300) : $faker->text(400))
-                ->setCategory($category)
+                ->setShortDescription($faker->text(200))
+                ->setPublicationDate($faker->boolean(75) ? $faker->dateTime : null)
+                ->setImage($faker->imageUrl())
             ;
 
             $manager->persist($post);

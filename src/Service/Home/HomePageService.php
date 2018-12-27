@@ -26,7 +26,7 @@ class HomePageService implements HomePageServiceInterface
      */
     public function getPosts(): PostsCollection
     {
-        $posts = $this->postRepository->findAll();
+        $posts = $this->postRepository->findPublished();
         $collection = new PostsCollection();
         $dataMaper = new PostMapper();
 

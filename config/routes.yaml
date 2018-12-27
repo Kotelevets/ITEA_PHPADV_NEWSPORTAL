@@ -7,7 +7,3 @@ category_view:
     requirements:
         slug: '^[A-Za-z0-9-_]+$'
     controller: App\Controller\CategoryController::view
-
-#contacts:
-#    path: /contacts
-#    controller: App\Controller\DefaultController::contacts

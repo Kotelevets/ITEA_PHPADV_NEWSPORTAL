@@ -20,7 +20,9 @@ class CategoryFixtures extends Fixture
             $category
                 ->setName($categoryName)
                 ->setSlug(\strtolower($categoryName))
-                ->setIsPublished($faker->boolean(80));
+                ->setIsPublished('true')
+                ->setDescription($faker->text())
+            ;
 
             $manager->persist($category);
             $this->addReference(Category::class.'_'.$key, $category);

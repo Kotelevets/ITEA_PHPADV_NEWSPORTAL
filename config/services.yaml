@@ -38,3 +38,4 @@ services:
     # Aliases
 
     App\Service\Home\HomePageServiceInterface: '@App\Service\Home\HomePageService'
+    App\Service\Category\CategoryPageServiceInterface: '@App\Service\Category\CategoryPageService'

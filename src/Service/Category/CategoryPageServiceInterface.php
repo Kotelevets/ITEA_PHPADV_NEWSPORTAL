@@ -6,9 +6,9 @@ use App\Dto\Category;
 use App\Post\PostsCollection;
 
 /**
- * Interface of CategoryPageServiceInteface that provides data post categories page.
+ * Interface of CategoryPageServiceInterface that provides data post categories page.
  */
-interface CategoryPageServiceInteface
+interface CategoryPageServiceInterface
 {
     /**
      * Gets category by provided category slug.

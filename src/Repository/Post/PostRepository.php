@@ -2,6 +2,7 @@
 
 namespace App\Repository\Post;
 
+use App\Dto\Category;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -26,5 +27,24 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findPublished()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.publicationDate is not NULL')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByCategory($category)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.publicationDate is not NULL and p.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

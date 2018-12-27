@@ -30,4 +30,14 @@ class CategoryRepository extends ServiceEntityRepository implements CategoryRepo
             ->getResult()
         ;
     }
+
+    public function findBySlug($slug)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
