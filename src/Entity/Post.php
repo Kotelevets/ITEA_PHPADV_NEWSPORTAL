@@ -32,7 +32,7 @@ class Post
     private $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="posts", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

@@ -2,8 +2,6 @@
 
 namespace App\Category;
 
-use App\Entity\Category;
-
 final class CategoriesCollection implements \IteratorAggregate
 {
     private $categories;
@@ -13,12 +11,6 @@ final class CategoriesCollection implements \IteratorAggregate
         $this->categories = $categories;
     }
 
-    /*
-        public function addCategory(Category $category): void
-        {
-            $this->categories[$category->getCategory()] = $category->getDescription();
-        }
-    */
     public function getIterator(): iterable
     {
         return new \ArrayIterator($this->categories);
