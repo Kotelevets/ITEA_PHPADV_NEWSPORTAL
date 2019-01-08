@@ -2,35 +2,38 @@
 
 namespace App\Service\Category;
 
-use App\Category\CategoriesCollection;
-use App\Category\CategoryMapper;
 use App\Dto\Category;
+use App\Category\CategoryMapper;
+use App\Category\CategoriesCollection;
 use App\Post\PostMapper;
 use App\Post\PostsCollection;
 use App\Repository\Category\CategoryRepositoryInterface;
-use App\Repository\Post\PostRepositoryInterface;
+use App\Exceptions\CategoryNotFoundException;
 
 final class CategoryPageService implements CategoryPageServiceInterface
 {
     private $categoryRepository;
-    private $postRepository;
 
-    public function __construct(
-        CategoryRepositoryInterface $categoryRepository,
-        PostRepositoryInterface $postRepository
-    ) {
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
         $this->categoryRepository = $categoryRepository;
-        $this->postRepository = $postRepository;
     }
 
+    /**
+     * Find category entity by slug and mapped it to category DTO
+     * Return exception CategoryNotFoundException - if category entity not found.
+     */
     public function getCategoryBySlug(string $slug): Category
     {
-        $dataMaper = new CategoryMapper();
-        foreach ($this->categoryRepository->findBySlug($slug) as $category) {
-            $resultCategory = $dataMaper->entityToDto($category);
+        $category = $this->categoryRepository->findOneBy(['slug' => $slug]);
+
+        if (!$category) {
+            throw new CategoryNotFoundException();
         }
 
-        return $resultCategory;
+        $mapper = new CategoryMapper();
+
+        return $mapper->entityToDto($category);
     }
 
     public function getCategories(): CategoriesCollection
@@ -42,13 +45,15 @@ final class CategoryPageService implements CategoryPageServiceInterface
 
     public function getPosts(Category $category): PostsCollection
     {
-        $dataMaper = new CategoryMapper();
-        $posts = $this->postRepository->findByCategory($dataMaper->dtoToEntity($category));
-        $collection = new PostsCollection();
         $dataMaper = new PostMapper();
+        $collection = new PostsCollection();
+        $entityCategory = $this->categoryRepository->findOneBy(['slug' => $category->getSlug()]);
+        $posts = $entityCategory->getPosts();
 
         foreach ($posts as $post) {
-            $collection->addPost($dataMaper->entityToDto($post));
+            if ($post->getPublicationDate()) {
+                $collection->addPost($dataMaper->entityToDto($post));
+            }
         }
 
         return $collection;

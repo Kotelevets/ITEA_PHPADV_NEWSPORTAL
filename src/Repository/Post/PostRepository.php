@@ -2,7 +2,6 @@
 
 namespace App\Repository\Post;
 
-use App\Dto\Category;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -20,29 +19,12 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
         parent::__construct($registry, Post::class);
     }
 
-    public function findAllWithCategories()
-    {
-        return $this->createQueryBuilder('p')
-            ->leftJoin('p.category', 'c')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
     public function findPublished()
     {
         return $this->createQueryBuilder('p')
+            ->innerJoin('p.category', 'c')
+            ->addSelect('c')
             ->andWhere('p.publicationDate is not NULL')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    public function findByCategory($category)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.publicationDate is not NULL and p.category = :category')
-            ->setParameter('category', $category)
             ->getQuery()
             ->getResult()
             ;

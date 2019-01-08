@@ -17,7 +17,7 @@ final class CategoryController extends AbstractController
     /**
      * Renders category page by provided slug.
      *
-     * @param string                      $slug
+     * @param string                       $slug
      * @param CategoryPageServiceInterface $service
      *
      * @return Response
@@ -30,17 +30,17 @@ final class CategoryController extends AbstractController
             throw $this->createNotFoundException(\sprintf('News category \'%s\' not found', $slug));
         }
 
-        $posts = $service->getPosts($category);
         $categories = $service->getCategories();
+        $posts = $service->getPosts($category);
 
         return $this->
         render(
             'category/category.html.twig',
             [
-                'posts'      => $posts,
-                'category'   => $category,
+                'slug' => $slug,
+                'category' => $category,
                 'categories' => $categories,
-                'slug'       => $slug,
+                'posts' => $posts,
             ]
         );
     }
